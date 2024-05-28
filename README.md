@@ -6,13 +6,13 @@ react portal tooltip
 
 ```bash
 #pnpm
-pnpm add tata-react-tooltip
+pnpm add -D tata-react-tooltip
 
 # npm
-npm i tata-react-tooltip
+npm i -D tata-react-tooltip
 
 # yarn
-yarn add tata-react-tooltip
+yarn add -D tata-react-tooltip
 ```
 
 ## Usage
