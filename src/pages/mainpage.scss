@@ -1,0 +1,28 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 300px;
+  width: 500px;
+  height: 500px;
+  border: 1px solid #E4E5EA;
+  overflow: auto;
+  gap: 20px;
+}
+
+.main-container2 {
+  padding-top: 300px;
+  padding-left: 300px;
+}
+
+.hello {
+  color: #5886e2;
+  width: 200px;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 20px;
+  background-color: #e8efff;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
