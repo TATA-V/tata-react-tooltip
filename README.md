@@ -83,7 +83,7 @@ export default MainPage;
 | <span style="color:red">*</span>parentWidth | 부모 요소의 너비 | `number` | - |
 | <span style="color:red">*</span>parentHeight | 부모 요소의 높이 | `number` | - |
 | message | 툴팁에 표시할 메시지 | `string` | - |
-| direction | 툴팁의 방향 | `tl` ￨ `top` ￨ `tr` ￨ `rt` ￨ `right` ￨ `rb` ￨ `bl` ￨ `bottom` ￨ `br` ￨ `lt` ￨ `left` ￨ `lb` |
+| direction | 툴팁의 방향 | `tl` ￨ `top` ￨ `tr` ￨ `rt` ￨ `right` ￨ `rb` ￨ `bl` ￨ `bottom` ￨ `br` ￨ `lt` ￨ `left` ￨ `lb` | `top` |
 | customStyle | 툴팁의 커스텀 스타일 | `CSSProperties` | - |
 | leaveDelay | 마우스가 툴팁에서 떠났을 때 사라지기까지의 지연 시간 | `number` | - |
 | enterDelay | 마우스가 툴팁에 올려졌을 때 나타나기까지의 지연 시간 | `number` | - |
