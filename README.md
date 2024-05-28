@@ -35,7 +35,7 @@ import Tooltip from 'tata-react-tooltip'
 </Tooltip>
 
 // custom style
-<Tooltip customTooltip={{ back }} direction="right" parentWidth={200} parentHeight={180} message="hello tooltip!">
+<Tooltip customStyle={{ backgroundColor: '#330867', color: '#30CFD0' }} direction="right" parentWidth={200} parentHeight={180} message="hello tooltip!">
   <div className="hello">
       Hello Tooltip!
   </div>
