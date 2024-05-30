@@ -15,7 +15,7 @@ function MainPage() {
   return (
     <div className="main-container2">
       {/* <div className="main-container"> */}
-      <Tooltip dialog direction="bl" parentWidth={parent.width} parentHeight={parent.height} message={shortTxt}>
+      <Tooltip customStyle={{ backgroundColor: '#330867', color: '#30CFD0' }} direction="bl" parentWidth={parent.width} parentHeight={parent.height} message={shortTxt}>
         <div ref={parentRef} className="hello">
           Hello Tooltip!
         </div>

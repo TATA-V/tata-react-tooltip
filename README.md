@@ -5,7 +5,7 @@ react portal tooltip
 ## Installation
 
 ```bash
-#pnpm
+# pnpm
 pnpm add -D tata-react-tooltip
 
 # npm
