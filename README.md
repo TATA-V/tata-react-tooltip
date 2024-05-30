@@ -18,7 +18,7 @@ yarn add -D tata-react-tooltip
 ## Usage
 
 ```tsx
-import Tooltip from 'tata-react-tooltip'
+import Tooltip from 'tata-react-tooltip';
 
 // default
 <Tooltip direction="right" parentWidth={200} parentHeight={180} message="hello tooltip!">
@@ -45,7 +45,7 @@ import Tooltip from 'tata-react-tooltip'
 useRef
 
 ```tsx
-import Tooltip from 'src/lib/Tooltip/Tooltip';
+import Tooltip from 'tata-react-tooltip';
 import { useEffect, useRef, useState } from 'react';
 import './mainpage.scss';
 
@@ -80,22 +80,22 @@ export default MainPage;
 
 | Property | Description | Type | Default |
 | ------- | ------- | ------- | ------- |
-| <span style="color:red">*</span>parentWidth | 부모 요소의 너비 | `number` | - |
-| <span style="color:red">*</span>parentHeight | 부모 요소의 높이 | `number` | - |
+| <span style="color:red">*</span>parentWidth | 부모 요소의 너비(픽셀 단위의 숫자) | `number` | - |
+| <span style="color:red">*</span>parentHeight | 부모 요소의 높이(픽셀 단위의 숫자) | `number` | - |
 | message | 툴팁에 표시할 메시지 | `string` | - |
-| direction | 툴팁의 방향 | `tl` ￨ `top` ￨ `tr` ￨ `rt` ￨ `right` ￨ `rb` ￨ `bl` ￨ `bottom` ￨ `br` ￨ `lt` ￨ `left` ￨ `lb` | `top` |
-| customStyle | 툴팁의 커스텀 스타일 | `CSSProperties` | - |
-| leaveDelay | 마우스가 툴팁에서 떠났을 때 사라지기까지의 지연 시간 | `number` | - |
-| enterDelay | 마우스가 툴팁에 올려졌을 때 나타나기까지의 지연 시간 | `number` | - |
+| direction | 툴팁이 부모 요소에 상대적으로 나타나는 방향 | `tl` ￨ `top` ￨ `tr` ￨ `rt` ￨ `right` ￨ `rb` ￨ `bl` ￨ `bottom` ￨ `br` ￨ `lt` ￨ `left` ￨ `lb` | `top` |
+| customStyle | 툴팁에 적용할 사용자 지정 CSS 스타일 | `CSSProperties` | - |
+| leaveDelay | 마우스가 부모 요소에서 떠난 후 툴팁이 사라지기까지의 지연 시간(밀리초) | `number` | - |
+| enterDelay | 마우스가 부모 요소에 올려진 후 툴팁이 나타나기까지의 지연 시간(밀리초) | `number` | - |
 | color | 툴팁 텍스트의 색상 | `string` | - |
 | bgColor | 툴팁 배경의 색상 | `string` | `#333` |
 | tailColor | 툴팁 꼬리의 색상 | `string` | `#333` |
 | tailBorderColor | 툴팁 꼬리의 테두리 색상 | `string` | `#333` |
-| hideTail | 툴팁 꼬리 숨기기 여부 | `boolean` | `false` |
-| dialog | 다이얼로그 형태의 툴팁 여부 | `boolean` | `false` |
-| dialogIcon | 다이얼로그 툴팁 아이콘 | `ReactNode` | `<WarnIcon />` |
-| dialogBtnText | 다이얼로그 버튼 텍스트 | `string` | `YES` |
-| customTooltip | 기본 툴팁 대신 사용할 컴포넌트 | `ReactNode` | - |
+| hideTail | 툴팁의 꼬리를 숨길지 여부 | `boolean` | `false` |
+| dialog | 툴팁을 대화 상자 형태로 표시할지 여부 | `boolean` | `false` |
+| dialogIcon | 대화 상자 스타일 툴팁에 표시할 아이콘 | `ReactNode` | `<WarnIcon />` |
+| dialogBtnText | 대화 상자 스타일 툴팁에 표시할 버튼 텍스트 | `string` | `YES` |
+| customTooltip | 기본 툴팁 대신 사용할 사용자 지정 컴포넌트 | `ReactNode` | - |
 
 
 
