@@ -23,8 +23,8 @@ jobs:
       
       - name: Set up Git user
         run: |
-          git config --global user.email ${{ secrets.EMAIL }}
-          git config --global user.name ${{ secrets.NAME }}
+          git config --global user.email tatahyeonv@gmail.com
+          git config --global user.name tatahyeonv
 
       - name: Install dependencies
         run: |-
