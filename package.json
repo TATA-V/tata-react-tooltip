@@ -1,6 +1,6 @@
 {
   "name": "tata-react-tooltip",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -19,9 +19,9 @@
     "name": "tata-v",
     "email": "tatahyeonv@gmail.com"
   },
-  "repository" : {
+  "repository": {
     "type": "git",
-    "url" : "git://github.com/TATA-V/tata-react-tooltip"
+    "url": "git://github.com/TATA-V/tata-react-tooltip"
   },
   "description": "react custom portal tooltip",
   "keywords": [
@@ -55,6 +55,7 @@
     "app": "^0.1.0",
     "eslint-plugin-react-refresh": "^0.4.7",
     "sass": "^1.77.2",
+    "standard-version": "^9.5.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.11",
