@@ -15,48 +15,35 @@ jobs:
       contents: write
     timeout-minutes: 8
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          registry-url: https://registry.npmjs.org/
-      
-      - name: Set up Git user
-        run: |
-          git config --global user.email tatahyeonv@gmail.com
-          git config --global user.name tatahyeonv
+    - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.PAT }}
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        registry-url: 'https://registry.npmjs.org/'
+    
+    - name: Build
+      run: |-
+        npm i -g pnpm
+        pnpm i
+        pnpm build
+        
+    - name: global config
+      run: |
+        git config --global user.email "tatahyeonv@gmail.com"
+        git config --global user.name "tatahyeonv"
 
-      - name: Install dependencies
-        run: |-
-          npm i -g pnpm
-          pnpm i
-
-      - name: Build
-        run: |-
-          pnpm build
-
-      - name: Auto version update
-        run: |-
-          pnpm add -D standard-version
-          pnpm standard-version --release-as patch
-
-      - name: Commit version bump
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_author: GitHub Actions <actions@github.com>
-          commit_message: 'chore: bump version to ${{ steps.auto_version.outputs.new_version }}'
-          commit_options: '--no-verify --signoff'
-          tag_message: 'Release ${{ steps.auto_version.outputs.new_version }}'
-        id: commit
-
-      - name: Push changes
-        run: |
-          git push origin main --follow-tags
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish to NPM
-        run: |
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - name: auto version update
+      run: |
+        npm version patch
+    - uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_author: Actions Bot <actions@github.com>
+        commit_message: 'chore(package.json): update version'
+    
+    - name: Publish to NPM
+      run: |
+        npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
