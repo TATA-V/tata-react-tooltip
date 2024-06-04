@@ -74,7 +74,7 @@ function Tooltip(props: Props) {
 
   return (
     <div className={`container ${direction} ${(dialog || customTooltip) && 'dialog'} ${hideTail && 'hide-tail'} ${isShow && 'show'} ${isHide && 'hide'}`}>
-      <div onMouseOver={mouseOver} onMouseLeave={mouseLeave}>
+      <div onMouseOver={mouseOver} onMouseLeave={mouseLeave} className="child">
         {children}
       </div>
       {createPortal(
