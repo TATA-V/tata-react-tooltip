@@ -1,4 +1,6 @@
-import { ReactNode, CSSProperties, useState, MouseEvent, useRef } from 'react';
+'use client';
+
+import { ReactNode, CSSProperties, useState, MouseEvent, useRef, useEffect } from 'react';
 import TooltipDialog from 'src/lib/Tooltip/TooltipDialog';
 import { createPortal } from 'react-dom';
 import { getTooltipPositin } from 'src/utils/getTooltipPosition';
@@ -32,6 +34,15 @@ function Tooltip(props: Props) {
   const [isShow, setIsShow] = useState(false);
   const [isHide, setIsHide] = useState(false);
   const [position, setPosition] = useState<{ x: number; y: number; } | null>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  if (!isClient) {
+    return null;
+  }
 
   const mouseLeave = () => {
     setIsShow(false);
@@ -45,7 +56,6 @@ function Tooltip(props: Props) {
     }, leaveDelay);
   };
 
-  const tooltipRef = useRef<HTMLDivElement>(null);
   const mouseOver = (e: MouseEvent<HTMLElement>) => {
     setIsShow(true);
     const bounds = e.currentTarget.getBoundingClientRect();
