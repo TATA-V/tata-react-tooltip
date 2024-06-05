@@ -1,6 +1,4 @@
-'use client';
-
-import { ReactNode, CSSProperties, useState, MouseEvent, useRef, useEffect } from 'react';
+import { ReactNode, CSSProperties, useState, MouseEvent, useRef, useEffect, useLayoutEffect } from 'react';
 import TooltipDialog from 'src/lib/Tooltip/TooltipDialog';
 import { createPortal } from 'react-dom';
 import { getTooltipPositin } from 'src/utils/getTooltipPosition';
@@ -35,14 +33,6 @@ function Tooltip(props: Props) {
   const [isHide, setIsHide] = useState(false);
   const [position, setPosition] = useState<{ x: number; y: number; } | null>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
-
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-  if (!isClient) {
-    return null;
-  }
 
   const mouseLeave = () => {
     setIsShow(false);
@@ -81,6 +71,15 @@ function Tooltip(props: Props) {
   const tooltipMouseLeave = () => {
     setIsShow(false);
   };
+
+  const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+  const [isClient, setIsClient] = useState(false);
+  useIsomorphicLayoutEffect(() => {
+    setIsClient(true);
+  }, []);
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <div className={`container ${direction} ${(dialog || customTooltip) && 'dialog'} ${hideTail && 'hide-tail'} ${isShow && 'show'} ${isHide && 'hide'}`}>
