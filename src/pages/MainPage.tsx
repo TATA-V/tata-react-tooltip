@@ -14,20 +14,11 @@ function MainPage() {
 
   return (
     <div className="main-container2">
-      {/* <div className="main-container"> */}
-      <Tooltip customStyle={{ backgroundColor: '#330867', color: '#30CFD0' }} direction="top" parentWidth={parent.width} parentHeight={parent.height} message={shortTxt}>
+      <Tooltip leaveDelay={2000} parentWidth={parent.width} parentHeight={parent.height} tailColor="#330867" tailBorderColor="#330867" customStyle={{ backgroundColor: '#330867', color: '#30CFD0' }} direction="top" message={shortTxt}>
         <div ref={parentRef} className="hello">
           Hello Tooltip!
         </div>
       </Tooltip>
-      {/* {[...Array(9)].map((_, idx) => (
-          <Tooltip key={idx} parentWidth={200} parentHeight={104} direction="rb" message={shortTxt}>
-            <div className="hello">
-              Hello Tooltip!
-            </div>
-          </Tooltip>
-        ))} */}
-      {/* </div> */}
     </div>
   );
 }

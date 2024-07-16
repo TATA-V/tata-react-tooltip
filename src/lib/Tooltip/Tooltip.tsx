@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { getTooltipPositin } from 'src/utils/getTooltipPosition';
 import 'src/lib/Tooltip/scss/tooltip.scss';
 
-type Direction = 'tl' | 'top' | 'tr' | 'rt' | 'right' | 'rb' | 'bl' | 'bottom' | 'br' | 'lt' | 'left' | 'lb'
+export type Direction = 'tl' | 'top' | 'tr' | 'rt' | 'right' | 'rb' | 'bl' | 'bottom' | 'br' | 'lt' | 'left' | 'lb'
 
 interface Props {
   children: ReactNode;
@@ -27,8 +27,7 @@ interface Props {
 }
 
 function Tooltip(props: Props) {
-  const { children, parentWidth, parentHeight, message, direction = 'top', customStyle, leaveDelay, enterDelay, color, bgColor, tailColor, tailBorderColor, hideTail, dialog, dialogIcon, dialogBtnText, customTooltip } = props;
-  const bgc = customStyle ? customStyle.backgroundColor : bgColor;
+  const { children, parentWidth, parentHeight, message, direction = 'top', customStyle, leaveDelay, enterDelay, color, bgColor, tailColor, tailBorderColor, hideTail, dialog = false, dialogIcon, dialogBtnText, customTooltip } = props;
   const [isShow, setIsShow] = useState(false);
   const [isHide, setIsHide] = useState(false);
   const [position, setPosition] = useState<{ x: number; y: number; } | null>(null);
@@ -81,8 +80,15 @@ function Tooltip(props: Props) {
     return null;
   }
 
+  const tooltipStyle: any = {
+    '--bg-color': bgColor,
+    '--text-color': color,
+    '--tail-bg': tailColor || (dialog ? '#fff' : '#333'),
+    '--tail-border': tailBorderColor || (dialog ? '#E4E5EA' : '#333'),
+  };
+
   return (
-    <div className={`container ${direction} ${(dialog || customTooltip) && 'dialog'} ${hideTail && 'hide-tail'} ${isShow && 'show'} ${isHide && 'hide'}`}>
+    <div className={`tooltip-main container ${direction} ${(dialog || customTooltip) && 'dialog'} ${hideTail && 'hide-tail'} ${isShow && 'show'} ${isHide && 'hide'}`}>
       <div onMouseOver={mouseOver} onMouseLeave={mouseLeave} className="child">
         {children}
       </div>
@@ -98,7 +104,7 @@ function Tooltip(props: Props) {
         >
           <div
             className={`tooltip ${(!dialog && !customTooltip) && 'default'} ${isShow && 'show'} ${isHide && 'hide'}`}
-            style={customStyle || undefined}
+            style={{ ...tooltipStyle, ...customStyle }}
             ref={tooltipRef}
             onMouseOver={tooltipMouseOver}
             onMouseLeave={tooltipMouseLeave}
@@ -111,15 +117,6 @@ function Tooltip(props: Props) {
         </div>,
         document.body,
       )}
-      <style>{`
-        :root {
-          --bg-color: ${bgc || '#333'};
-          --text-color: ${color || '#fff'};
-          --tail-bg: ${tailColor || (dialog ? '#fff' : '#333')};
-          --tail-border: ${tailBorderColor || (dialog ? '#E4E5EA' : '#333')};
-        }
-      `}
-      </style>
     </div>
   );
 }
