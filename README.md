@@ -1,78 +1,81 @@
-# React Tooltip
+# TATA React Tooltip
 
 react portal tooltip
 
-## Installation
+**<a href="https://tata-react-tooltip-docs.vercel.app">Documentation</a>**
 
-```bash
-# pnpm
-pnpm add -D tata-react-tooltip
+## Introduction
+ 
+Tooltip that **always stays on top** of the screen was created using the React **portal** feature.
 
+## Install
+
+```bash copy
 # npm
 npm i -D tata-react-tooltip
 
 # yarn
 yarn add -D tata-react-tooltip
+
+# pnpm
+pnpm add -D tata-react-tooltip
 ```
 
 ## Usage
 
-```tsx
-import Tooltip from 'tata-react-tooltip';
+```jsx copy
+import { Tooltip } from 'tata-react-tooltip';
+```
 
-// default
-<Tooltip direction="right" parentWidth={200} parentHeight={180} message="hello tooltip!">
-  <div className="hello">
-      Hello Tooltip!
-  </div>
-</Tooltip>
+### Default
 
-// dialog
-<Tooltip dialog direction="right" parentWidth={200} parentHeight={180} message="hello tooltip!">
-  <div className="hello">
-      Hello Tooltip!
-  </div>
-</Tooltip>
-
-// custom style
-<Tooltip customStyle={{ backgroundColor: '#330867', color: '#30CFD0' }} direction="right" parentWidth={200} parentHeight={180} message="hello tooltip!">
+```jsx copy
+<Tooltip
+  direction="right"
+  parentWidth={200}
+  parentHeight={180}
+  message="hello tooltip!"
+>
   <div className="hello">
       Hello Tooltip!
   </div>
 </Tooltip>
 ```
 
-useRef
+### Dialog
 
-```tsx
-import Tooltip from 'tata-react-tooltip';
-import { useEffect, useRef, useState } from 'react';
-import './mainpage.scss';
-
-function MainPage() {
-  const parentRef = useRef<HTMLDivElement>(null);
-  const [parent, setParent] = useState<{ width: number, height: number }>({ width: 0, height: 0 });
-  useEffect(() => {
-    if (!parentRef.current) return;
-    setParent({ width: parentRef.current.clientWidth, height: parentRef.current.clientHeight });
-  }, []);
-  const shortTxt = 'hello\nhello';
-
-  return (
-    <div className="main-container2">
-      <Tooltip dialog direction="bl" parentWidth={parent.width} parentHeight={parent.height} message={shortTxt}>
-        <div ref={parentRef} className="hello">
-          Hello Tooltip!
-        </div>
-      </Tooltip>
-    </div>
-  );
-}
-
-export default MainPage;
+```jsx copy
+<Tooltip
+  dialog
+  direction="right"
+  parentWidth={200}
+  parentHeight={180}
+  message="hello tooltip!"
+>
+  <div className="hello">
+      Hello Tooltip!
+  </div>
+</Tooltip>
 ```
 
+### Custom Style
 
+```jsx copy
+<Tooltip
+  direction="right"
+  parentWidth={200}
+  parentHeight={180}
+  message="hello tooltip!"
+  bgColor='#9667E9'
+  tailColor='#9667E9'
+  tailBorderColor='#9667E9'
+  customStyle={{ fontSize: '0.9rem', fontWeight: '600' }}
+>
+  <div className="hello">
+      Hello Tooltip!
+  </div>
+</Tooltip>
+```
 
 ## API
 
