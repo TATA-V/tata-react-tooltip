@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties, useState, MouseEvent, useRef, useEffect, useLayoutEffect, RefObject } from 'react';
+import { ReactNode, CSSProperties, useState, useRef, useEffect, useLayoutEffect, RefObject } from 'react';
 import TooltipDialog from 'src/lib/Tooltip/TooltipDialog';
 import { createPortal } from 'react-dom';
 import { getTooltipPositin } from 'src/utils/getTooltipPosition';
