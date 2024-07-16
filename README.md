@@ -10,7 +10,7 @@ Tooltip that **always stays on top** of the screen was created using the React *
 
 ## Install
 
-```bash copy
+```bash
 # npm
 npm i -D tata-react-tooltip
 
@@ -25,54 +25,54 @@ pnpm add -D tata-react-tooltip
 
 ```jsx copy
 import { Tooltip } from 'tata-react-tooltip';
+import { useRef } from 'react';
+
+const ref = useRef<HTMLDivElement>(null);
 ```
 
 ### Default
 
-```jsx copy
+```jsx
 <Tooltip
   direction="right"
-  parentWidth={200}
-  parentHeight={180}
+  parentRef={ref}
   message="hello tooltip!"
 >
-  <div className="hello">
-      Hello Tooltip!
+  <div ref={ref} className="hello">
+    Hello Tooltip!
   </div>
 </Tooltip>
 ```
 
 ### Dialog
 
-```jsx copy
+```jsx
 <Tooltip
   dialog
   direction="right"
-  parentWidth={200}
-  parentHeight={180}
+  parentRef={ref}
   message="hello tooltip!"
 >
-  <div className="hello">
-      Hello Tooltip!
+  <div ref={ref} className="hello">
+    Hello Tooltip!
   </div>
 </Tooltip>
 ```
 
 ### Custom Style
 
-```jsx copy
+```jsx
 <Tooltip
   direction="right"
-  parentWidth={200}
-  parentHeight={180}
+  parentRef={ref}
   message="hello tooltip!"
   bgColor='#9667E9'
   tailColor='#9667E9'
   tailBorderColor='#9667E9'
   customStyle={{ fontSize: '0.9rem', fontWeight: '600' }}
 >
-  <div className="hello">
-      Hello Tooltip!
+  <div ref={ref} className="hello">
+    Hello Tooltip!
   </div>
 </Tooltip>
 ```
@@ -83,8 +83,7 @@ import { Tooltip } from 'tata-react-tooltip';
 
 | Property | Description | Type | Default |
 | ------- | ------- | ------- | ------- |
-| <span style="color:red">*</span>parentWidth | 부모 요소의 너비(픽셀 단위의 숫자) | `number` | - |
-| <span style="color:red">*</span>parentHeight | 부모 요소의 높이(픽셀 단위의 숫자) | `number` | - |
+| <span style="color:red">*</span>parentRef | 부모 요소의 ref | `RefObject<any>` | - |
 | message | 툴팁에 표시할 메시지 | `string` | - |
 | direction | 툴팁이 부모 요소에 상대적으로 나타나는 방향 | `tl` ￨ `top` ￨ `tr` ￨ `rt` ￨ `right` ￨ `rb` ￨ `bl` ￨ `bottom` ￨ `br` ￨ `lt` ￨ `left` ￨ `lb` | `top` |
 | customStyle | 툴팁에 적용할 사용자 지정 CSS 스타일 | `CSSProperties` | - |

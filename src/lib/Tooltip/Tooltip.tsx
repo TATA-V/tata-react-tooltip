@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties, useState, MouseEvent, useRef, useEffect, useLayoutEffect } from 'react';
+import { ReactNode, CSSProperties, useState, MouseEvent, useRef, useEffect, useLayoutEffect, RefObject } from 'react';
 import TooltipDialog from 'src/lib/Tooltip/TooltipDialog';
 import { createPortal } from 'react-dom';
 import { getTooltipPositin } from 'src/utils/getTooltipPosition';
@@ -8,8 +8,7 @@ export type Direction = 'tl' | 'top' | 'tr' | 'rt' | 'right' | 'rb' | 'bl' | 'bo
 
 interface Props {
   children: ReactNode;
-  parentWidth: number;
-  parentHeight: number;
+  parentRef: RefObject<any>;
   message?: string;
   direction?: Direction;
   customStyle?: CSSProperties;
@@ -27,11 +26,50 @@ interface Props {
 }
 
 function Tooltip(props: Props) {
-  const { children, parentWidth, parentHeight, message, direction = 'top', customStyle, leaveDelay, enterDelay, color, bgColor, tailColor, tailBorderColor, hideTail, dialog = false, dialogIcon, dialogBtnText, customTooltip } = props;
+  const { children, parentRef, message, direction = 'top', customStyle, leaveDelay, enterDelay, color, bgColor, tailColor, tailBorderColor, hideTail, dialog = false, dialogIcon, dialogBtnText, customTooltip } = props;
   const [isShow, setIsShow] = useState(false);
   const [isHide, setIsHide] = useState(false);
   const [position, setPosition] = useState<{ x: number; y: number; } | null>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
+
+  const isScrolling = useRef(false);
+  let scrollTimeout: ReturnType<typeof setTimeout>;
+
+  const updatePosition = () => {
+    if (!parentRef.current || !tooltipRef.current) return;
+    const bounds = parentRef.current.getBoundingClientRect();
+    const tooltipBounds = tooltipRef.current.getBoundingClientRect();
+    const parentData = { width: bounds.width, height: bounds.height };
+    const { x, y } = getTooltipPositin(direction, bounds, tooltipBounds, parentData);
+    setPosition({ x, y });
+  };
+
+  const handleScroll = () => {
+    if (!isShow) return;
+    if (!isScrolling.current) {
+      isScrolling.current = true;
+      requestAnimationFrame(updatePositionContinuously);
+    }
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      isScrolling.current = false;
+    }, 100);
+  };
+
+  const updatePositionContinuously = () => {
+    if (isScrolling.current && isShow) {
+      updatePosition();
+      requestAnimationFrame(updatePositionContinuously);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, true);
+    return () => {
+      window.removeEventListener('scroll', handleScroll, true);
+      clearTimeout(scrollTimeout);
+    };
+  }, [isShow]);
 
   const mouseLeave = () => {
     setIsShow(false);
@@ -45,14 +83,9 @@ function Tooltip(props: Props) {
     }, leaveDelay);
   };
 
-  const mouseOver = (e: MouseEvent<HTMLElement>) => {
+  const mouseOver = () => {
     setIsShow(true);
-    const bounds = e.currentTarget.getBoundingClientRect();
-    const tooltipBounds = tooltipRef.current?.getBoundingClientRect();
-    const parent = { width: parentWidth, height: parentHeight };
-    const { x, y } = getTooltipPositin(direction, bounds, tooltipBounds, parent);
-    setPosition({ x, y });
-
+    updatePosition();
     setIsHide(true);
     setTimeout(() => {
       setIsHide(false);
@@ -81,14 +114,14 @@ function Tooltip(props: Props) {
   }
 
   const tooltipStyle: any = {
-    '--bg-color': bgColor,
-    '--text-color': color,
+    '--bg-color': bgColor || '#333',
+    '--text-color': color || '#fff',
     '--tail-bg': tailColor || (dialog ? '#fff' : '#333'),
     '--tail-border': tailBorderColor || (dialog ? '#E4E5EA' : '#333'),
   };
 
   return (
-    <div className={`tooltip-main container ${direction} ${(dialog || customTooltip) && 'dialog'} ${hideTail && 'hide-tail'} ${isShow && 'show'} ${isHide && 'hide'}`}>
+    <div className={`container ${direction} ${(dialog || customTooltip) && 'dialog'} ${hideTail && 'hide-tail'} ${isShow && 'show'} ${isHide && 'hide'}`}>
       <div onMouseOver={mouseOver} onMouseLeave={mouseLeave} className="child">
         {children}
       </div>
