@@ -133,6 +133,8 @@ function Tooltip(props: Props) {
             left: position ? position.x : undefined,
             position: 'fixed',
             zIndex: 10,
+            width: '100%',
+            whiteSpace: 'pre-wrap',
           }}
         >
           <div

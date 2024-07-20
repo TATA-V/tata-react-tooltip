@@ -4,7 +4,7 @@ import { useRef } from 'react';
 
 function MainPage() {
   const parentRef = useRef<HTMLDivElement>(null);
-  const shortTxt = 'hello\nhello';
+  const shortTxt = 'hello hello\nhello';
 
   return (
     <div className="main-container2">
